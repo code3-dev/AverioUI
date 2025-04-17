@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت نام | AverioUI</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            light: '#8B5CF6',
+                            DEFAULT: '#5B21B6',
+                            dark: '#4C1D95',
+                        },
+                        secondary: {
+                            DEFAULT: '#10B981',
+                        },
+                        accent: {
+                            DEFAULT: '#F59E0B',
+                        }
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100">
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <img src="images/logo.png" alt="لوگو" class="logo">
+                <h1>ثبت نام</h1>
+                <p>لطفا اطلاعات خود را برای ثبت نام وارد کنید</p>
+            </div>
+            
+            <!-- Registration Form -->
+            <form id="registerForm">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="input-group">
+                        <label for="firstName">نام</label>
+                        <div class="input-with-icon">
+                            <i class="input-icon fa-solid fa-user"></i>
+                            <input type="text" id="firstName" name="firstName" placeholder="نام خود را وارد کنید" required>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="lastName">نام خانوادگی</label>
+                        <div class="input-with-icon">
+                            <i class="input-icon fa-solid fa-user"></i>
+                            <input type="text" id="lastName" name="lastName" placeholder="نام خانوادگی خود را وارد کنید" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="email">ایمیل</label>
+                    <div class="input-with-icon">
+                        <i class="input-icon fa-solid fa-envelope"></i>
+                        <input type="email" id="email" name="email" placeholder="ایمیل خود را وارد کنید" required>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="mobile">شماره موبایل</label>
+                    <div class="input-with-icon">
+                        <i class="input-icon fa-solid fa-mobile-screen"></i>
+                        <input type="tel" id="mobile" name="mobile" placeholder="شماره موبایل خود را وارد کنید" required>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">رمز عبور</label>
+                    <div class="input-with-icon">
+                        <i class="input-icon fa-solid fa-lock" id="password-toggle"></i>
+                        <input type="password" id="password" name="password" placeholder="رمز عبور خود را وارد کنید" required>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="confirmPassword">تکرار رمز عبور</label>
+                    <div class="input-with-icon">
+                        <i class="input-icon fa-solid fa-lock" id="confirm-password-toggle"></i>
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="رمز عبور را مجددا وارد کنید" required>
+                    </div>
+                </div>
+                
+                <!-- Captcha Container -->
+                <div class="captcha-container">
+                    <div class="captcha-image">
+                        <img src="images/captcha.png" alt="کد امنیتی">
+                    </div>
+                    <div class="captcha-refresh">
+                        <i class="fa-solid fa-rotate"></i>
+                        <span>بارگذاری مجدد تصویر</span>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="captcha">کد امنیتی</label>
+                    <div class="input-with-icon">
+                        <i class="input-icon fa-solid fa-shield"></i>
+                        <input type="text" id="captcha" name="captcha" placeholder="کد امنیتی را وارد کنید" required>
+                    </div>
+                </div>
+                
+                <div class="flex items-center mb-4">
+                    <input type="checkbox" id="agreeTerms" name="agreeTerms" class="h-4 w-4 text-primary border-gray-300 rounded" required>
+                    <label for="agreeTerms" class="mr-2 text-sm text-gray-600">
+                        <span>با <a href="#" class="text-primary hover:underline">شرایط و قوانین</a> موافقم</span>
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <span class="flex items-center justify-center">
+                        <span>ثبت نام</span>
+                        <i class="fa-solid fa-user-plus mr-2"></i>
+                    </span>
+                </button>
+            </form>
+            
+            <div class="form-footer">
+                <p>حساب کاربری دارید؟ <a href="login.html">ورود</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerForm = document.getElementById('registerForm');
+            
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validate form
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                if (password !== confirmPassword) {
+                    const errorMessage = document.createElement('div');
+                    errorMessage.className = 'error-message';
+                    errorMessage.innerHTML = '<i class="fa-solid fa-exclamation-circle mr-2"></i> رمز عبور و تکرار آن مطابقت ندارند!';
+                    
+                    // Remove any existing error message
+                    const existingError = document.querySelector('.error-message');
+                    if (existingError) {
+                        existingError.remove();
+                    }
+                    
+                    registerForm.prepend(errorMessage);
+                    return;
+                }
+                
+                // Here you would typically make an API call to register the user
+                const formData = new FormData(registerForm);
+                const userData = Object.fromEntries(formData);
+                console.log('Registration data:', userData);
+                
+                // For demonstration, simulate successful registration
+                const successMessage = document.createElement('div');
+                successMessage.className = 'success-message';
+                successMessage.innerHTML = '<i class="fa-solid fa-check-circle mr-2"></i> ثبت نام با موفقیت انجام شد! در حال انتقال...';
+                
+                registerForm.prepend(successMessage);
+                
+                // Redirect after 2 seconds (for demonstration)
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
+            });
+            
+            // Toggle password visibility
+            const togglePassword = (element, inputId) => {
+                const passwordField = document.getElementById(inputId);
+                
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    element.classList.remove('fa-lock');
+                    element.classList.add('fa-lock-open');
+                } else {
+                    passwordField.type = 'password';
+                    element.classList.remove('fa-lock-open');
+                    element.classList.add('fa-lock');
+                }
+            };
+            
+            // Add click handlers to password icons
+            const passwordIcon = document.getElementById('password-toggle');
+            if (passwordIcon) {
+                passwordIcon.addEventListener('click', function() {
+                    togglePassword(this, 'password');
+                });
+            }
+            
+            const confirmPasswordIcon = document.getElementById('confirm-password-toggle');
+            if (confirmPasswordIcon) {
+                confirmPasswordIcon.addEventListener('click', function() {
+                    togglePassword(this, 'confirmPassword');
+                });
+            }
+            
+            // Refresh captcha
+            document.querySelector('.captcha-refresh').addEventListener('click', function() {
+                const captchaImg = document.querySelector('.captcha-image img');
+                captchaImg.src = 'images/captcha.png?base-ok&' + new Date().getTime();
+            });
+        });
+    </script>
+</body>
+</html> 

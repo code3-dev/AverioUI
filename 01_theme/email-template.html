@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>تایید حساب کاربری</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/npm/vazirmatn@33.0.3/Vazirmatn-font-face.css');
+        
+        :root {
+            --primary-color: #5B21B6;
+            --primary-light: #8B5CF6;
+            --primary-dark: #4C1D95;
+            --secondary-color: #10B981;
+            --accent-color: #F59E0B;
+            --text-dark: #1F2937;
+            --text-light: #F9FAFB;
+            --background-light: #F3F4F6;
+            --background-white: #FFFFFF;
+            --border-color: #E5E7EB;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+            direction: rtl;
+        }
+        
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: var(--background-white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .email-header {
+            padding: 2rem 1.5rem;
+            text-align: center;
+            color: white;
+            background-color: var(--primary-color);
+            position: relative;
+        }
+        
+        .email-logo-container {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1.5rem;
+            background-color: white;
+            border-radius: 12px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .email-logo {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .email-header h1 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .email-header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .email-content {
+            padding: 2rem;
+        }
+        
+        .greeting {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+        
+        .message {
+            margin-bottom: 1.5rem;
+            color: #4B5563;
+            font-size: 1rem;
+        }
+        
+        .verification-code {
+            background-color: #f8f9fa;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            font-size: 2rem;
+            letter-spacing: 4px;
+            font-weight: 700;
+            text-align: center;
+            margin: 1.5rem 0;
+            color: var(--primary-color);
+        }
+        
+        .button-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .alternative-action {
+            margin-top: 1rem;
+            text-align: center;
+            color: #4B5563;
+            font-size: 0.9rem;
+        }
+        
+        .alternative-action a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .email-footer {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #6B7280;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .social-links {
+            margin: 1rem 0;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+        
+        .social-links img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+        
+        .disclaimer {
+            margin-top: 1.5rem;
+            font-size: 0.8rem;
+            color: #9CA3AF;
+        }
+        
+        .help-text {
+            margin-top: 1.5rem;
+            color: #4B5563;
+            background-color: rgba(241, 245, 249, 0.8);
+            border-radius: 8px;
+            padding: 1rem;
+            border-right: 3px solid var(--primary-light);
+        }
+        
+        .help-text a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        @media only screen and (max-width: 600px) {
+            .email-container {
+                width: 100%;
+                margin: 0;
+                border-radius: 0;
+            }
+            
+            .email-content {
+                padding: 1.5rem;
+            }
+            
+            .email-logo-container {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .email-header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .greeting {
+                font-size: 1.125rem;
+            }
+            
+            .verification-code {
+                font-size: 1.5rem;
+                padding: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            <div class="email-logo-container">
+                <img src="images/logo.png" alt="لوگو" class="email-logo">
+            </div>
+            <h1>بازنشانی رمز عبور</h1>
+            <p>درخواست بازنشانی رمز عبور حساب کاربری شما</p>
+        </div>
+        
+        <div class="email-content">
+            <div class="greeting">سلام کاربر گرامی،</div>
+            
+            <div class="message">
+                <p>اخیراً درخواستی برای بازنشانی رمز عبور حساب کاربری شما دریافت کردیم. برای ادامه فرآیند بازنشانی رمز عبور، لطفاً از کد تایید زیر استفاده کنید یا بر روی دکمه بازنشانی رمز عبور کلیک نمایید.</p>
+            </div>
+            
+            <div class="verification-code">۱۲۳۴۵۶</div>
+            
+            <div class="button-container">
+                <a href="#" class="button">بازنشانی رمز عبور</a>
+            </div>
+            
+            <div class="alternative-action">
+                <p>اگر دکمه بالا کار نمی‌کند، می‌توانید مستقیما از <a href="#">این لینک</a> استفاده کنید.</p>
+            </div>
+            
+            <div class="help-text">
+                <p>اگر شما درخواست بازنشانی رمز عبور نداده‌اید، می‌توانید این ایمیل را نادیده بگیرید. حساب کاربری شما تغییر نخواهد کرد.</p>
+                <p>این کد تایید به مدت 24 ساعت معتبر است.</p>
+                <p>برای سوالات بیشتر و پشتیبانی، لطفا با <a href="mailto:support@example.com">support@example.com</a> تماس بگیرید.</p>
+            </div>
+        </div>
+        
+        <div class="email-footer">
+            <div class="social-links">
+                <a href="#"><img src="https://via.placeholder.com/32x32/5B21B6/FFFFFF?text=FB" alt="فیسبوک"></a>
+                <a href="#"><img src="https://via.placeholder.com/32x32/5B21B6/FFFFFF?text=IG" alt="اینستاگرام"></a>
+                <a href="#"><img src="https://via.placeholder.com/32x32/5B21B6/FFFFFF?text=TW" alt="توییتر"></a>
+                <a href="#"><img src="https://via.placeholder.com/32x32/5B21B6/FFFFFF?text=LI" alt="لینکدین"></a>
+            </div>
+            
+            <p>آدرس: تهران، خیابان ولیعصر، پلاک 123</p>
+            <p>کپی‌رایت © 2024 نام شرکت. تمامی حقوق محفوظ است.</p>
+            
+            <div class="disclaimer">
+                <p>این ایمیل به صورت خودکار ارسال شده است، لطفا به آن پاسخ ندهید.</p>
+                <p>شما این ایمیل را دریافت کرده‌اید زیرا آدرس ایمیل شما در سامانه ما ثبت شده است.</p>
+                <p>برای لغو اشتراک <a href="#">اینجا کلیک کنید</a>.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AverioUI | قالب‌های مدرن احراز هویت</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Prism.js for syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        vazir: ['Vazirmatn', 'sans-serif'],
+                    },
+                    colors: {
+                        'theme1': {
+                            primary: '#5B21B6',
+                            light: '#8B5CF6',
+                            dark: '#4C1D95',
+                        },
+                        'theme2': {
+                            primary: '#6366F1',
+                            light: '#818CF8',
+                            dark: '#4F46E5',
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Copy to clipboard function
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const notification = document.getElementById('copyNotification');
+                notification.classList.remove('hidden');
+                setTimeout(() => {
+                    notification.classList.add('hidden');
+                }, 2000);
+            }).catch(err => {
+                console.error('Could not copy text: ', err);
+            });
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        
+        .font-en {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .theme1-gradient {
+            background: linear-gradient(135deg, #8B5CF6, #5B21B6);
+        }
+        
+        .theme2-gradient {
+            background: linear-gradient(135deg, #818CF8, #4F46E5);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(125deg, #4C1D95, #4F46E5, #8B5CF6);
+            background-size: 200% 200%;
+            animation: gradientFlow 15s ease infinite;
+        }
+        
+        @keyframes gradientFlow {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        .card-hover-effect {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .theme-card {
+            min-height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .theme-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .theme-card img {
+            transition: transform 0.5s ease;
+        }
+        
+        .theme-card:hover img {
+            transform: translateY(-5%);
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-3px);
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-delay-1 {
+            animation-delay: 2s;
+        }
+        
+        .floating-delay-2 {
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        .glow {
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 10px -10px rgba(111, 66, 193, 0.8);
+            }
+            to {
+                box-shadow: 0 0 20px 5px rgba(111, 66, 193, 0.6);
+            }
+        }
+        
+        /* Add background grid pattern */
+        .bg-grid-pattern {
+            background-image: 
+                linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Hero Section -->
+    <header class="hero-gradient text-white min-h-screen flex items-center relative overflow-hidden">
+        <!-- Animated shapes -->
+        <div class="absolute inset-0 -z-10 overflow-hidden">
+            <div class="absolute top-20 right-10 w-64 h-64 bg-white opacity-5 rounded-full floating"></div>
+            <div class="absolute top-40 left-20 w-40 h-40 bg-white opacity-10 rounded-full floating floating-delay-1"></div>
+            <div class="absolute bottom-20 left-1/4 w-80 h-80 bg-white opacity-5 rounded-full floating floating-delay-2"></div>
+            <div class="absolute top-1/3 right-1/4 w-40 h-40 bg-white opacity-5 rounded-full floating"></div>
+            <div class="absolute bottom-10 right-10 w-72 h-72 bg-white opacity-10 rounded-full floating floating-delay-1"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 py-16 relative z-10">
+            <div class="flex flex-col items-center text-center">
+                <div class="mb-6">
+                    <span class="font-en font-bold tracking-wide text-3xl inline-block py-2 px-6 bg-white/10 rounded-full backdrop-blur-sm">AverioUI</span>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-bold mb-8 max-w-5xl">
+                    قالب‌های <span class="bg-clip-text text-transparent bg-gradient-to-l from-white to-purple-200">احراز هویت</span> مدرن
+                </h1>
+                
+                <p class="text-xl md:text-2xl text-white/80 mb-12 max-w-3xl">
+                    مجموعه قالب‌های متن باز و رایگان برای پیاده‌سازی صفحات احراز هویت با طراحی مدرن و پشتیبانی از زبان فارسی و قالب راست به چپ
+                </p>
+                
+                <div class="flex flex-wrap gap-5 justify-center mb-12">
+                    <a href="#themes" class="px-10 py-4 rounded-xl bg-white text-theme1-primary font-semibold hover:shadow-lg transition text-lg">
+                        مشاهده قالب‌ها
+                    </a>
+                    <a href="https://github.com/code3-dev/AverioUI" target="_blank" class="px-10 py-4 rounded-xl bg-white/10 backdrop-blur-sm border border-white/30 text-white font-semibold hover:bg-white/20 transition flex items-center gap-2 text-lg">
+                        <i class="fab fa-github"></i>
+                        <span>گیت‌هاب</span>
+                    </a>
+                </div>
+                
+                <div class="flex items-center justify-center gap-8 flex-wrap">
+                    <div class="flex -space-x-4 rtl:space-x-reverse">
+                        <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="https://randomuser.me/api/portraits/women/79.jpg" alt="">
+                        <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="https://randomuser.me/api/portraits/men/10.jpg" alt="">
+                        <img class="w-12 h-12 border-2 border-white rounded-full dark:border-gray-800" src="https://randomuser.me/api/portraits/women/1.jpg" alt="">
+                        <a class="flex items-center justify-center w-12 h-12 text-xs font-medium text-white bg-white/10 backdrop-blur-sm border-2 border-white rounded-full hover:bg-white/20" href="#">+۹۹</a>
+                    </div>
+                    <p class="text-white/80">بیش از ۱۰۰ توسعه‌دهنده از این قالب‌ها استفاده می‌کنند</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-0 left-0 right-0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120">
+                <path fill="#f9fafb" fill-opacity="1" d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path>
+            </svg>
+        </div>
+    </header>
+    
+    <!-- Features Section -->
+    <section class="py-24 bg-white relative overflow-hidden">
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute top-0 left-0 w-64 h-64 bg-theme1-light opacity-5 rounded-full"></div>
+            <div class="absolute bottom-0 right-0 w-64 h-64 bg-theme2-light opacity-5 rounded-full"></div>
+        </div>
+        
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1.5 bg-blue-100 text-theme2-primary rounded-full text-sm font-medium mb-4">ویژگی‌های مشترک</span>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">قالب‌هایی با امکانات کامل</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">تمامی قالب‌های ما دارای ویژگی‌های مشترکی هستند که استفاده از آنها را آسان و لذت‌بخش می‌کند.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="group p-8 bg-white rounded-3xl card-hover-effect border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute w-32 h-32 -top-16 -right-16 bg-gradient-to-br from-purple-100 to-purple-50 rounded-full group-hover:scale-110 transition-transform duration-500"></div>
+                    <div class="w-16 h-16 rounded-2xl theme1-gradient flex items-center justify-center text-white mb-6 relative">
+                        <i class="fas fa-mobile-screen-button text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 relative">ریسپانسیو</h3>
+                    <p class="text-gray-600 relative">طراحی واکنش‌گرا برای نمایش مناسب در تمامی دستگاه‌ها از موبایل تا دسکتاپ</p>
+                </div>
+                
+                <div class="group p-8 bg-white rounded-3xl card-hover-effect border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute w-32 h-32 -top-16 -right-16 bg-gradient-to-br from-indigo-100 to-indigo-50 rounded-full group-hover:scale-110 transition-transform duration-500"></div>
+                    <div class="w-16 h-16 rounded-2xl theme2-gradient flex items-center justify-center text-white mb-6 relative">
+                        <i class="fas fa-language text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 relative">پشتیبانی RTL</h3>
+                    <p class="text-gray-600 relative">طراحی شده برای زبان فارسی با پشتیبانی کامل از قالب راست به چپ</p>
+                </div>
+                
+                <div class="group p-8 bg-white rounded-3xl card-hover-effect border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute w-32 h-32 -top-16 -right-16 bg-gradient-to-br from-purple-100 to-purple-50 rounded-full group-hover:scale-110 transition-transform duration-500"></div>
+                    <div class="w-16 h-16 rounded-2xl theme1-gradient flex items-center justify-center text-white mb-6 relative">
+                        <i class="fas fa-universal-access text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 relative">دسترسی‌پذیری</h3>
+                    <p class="text-gray-600 relative">رعایت اصول دسترسی‌پذیری برای استفاده آسان توسط تمامی کاربران</p>
+                </div>
+                
+                <div class="group p-8 bg-white rounded-3xl card-hover-effect border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden">
+                    <div class="absolute w-32 h-32 -top-16 -right-16 bg-gradient-to-br from-indigo-100 to-indigo-50 rounded-full group-hover:scale-110 transition-transform duration-500"></div>
+                    <div class="w-16 h-16 rounded-2xl theme2-gradient flex items-center justify-center text-white mb-6 relative">
+                        <i class="fas fa-code text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 relative">متن باز</h3>
+                    <p class="text-gray-600 relative">کد منبع آزاد و رایگان برای استفاده در پروژه‌های شخصی و تجاری</p>
+                </div>
+            </div>
+            
+            <div class="mt-16 flex flex-wrap md:flex-nowrap gap-8 items-center">
+                <div class="w-full md:w-1/2">
+                    <img src="https://placehold.co/800x600/E2E8F0/64748B/png?text=AverioUI+Features&font=Vazirmatn" alt="ویژگی‌های AverioUI" class="w-full rounded-3xl shadow-lg">
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-3xl font-bold mb-6">چرا AverioUI؟</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-4">
+                            <div class="mt-1 w-8 h-8 rounded-full theme1-gradient flex items-center justify-center text-white shrink-0">
+                                <i class="fas fa-check text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold">طراحی مدرن</h4>
+                                <p class="text-gray-600">قالب‌های زیبا و کاربرپسند با طراحی روز و متناسب با نیازهای کاربران</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="mt-1 w-8 h-8 rounded-full theme2-gradient flex items-center justify-center text-white shrink-0">
+                                <i class="fas fa-check text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold">سازگاری با فریم‌ورک‌ها</h4>
+                                <p class="text-gray-600">امکان استفاده با انواع فریم‌ورک‌های بک‌اند مانند Laravel، Django، Node.js و غیره</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="mt-1 w-8 h-8 rounded-full theme1-gradient flex items-center justify-center text-white shrink-0">
+                                <i class="fas fa-check text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold">کد تمیز و استاندارد</h4>
+                                <p class="text-gray-600">استفاده از بهترین شیوه‌های کدنویسی و استانداردهای وب برای عملکرد بهینه</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="mt-1 w-8 h-8 rounded-full theme2-gradient flex items-center justify-center text-white shrink-0">
+                                <i class="fas fa-check text-sm"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold">سفارشی‌سازی آسان</h4>
+                                <p class="text-gray-600">امکان تغییر رنگ‌ها، فونت‌ها و سایر المان‌ها به راحتی و بدون نیاز به دانش عمیق</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Themes Section -->
+    <section id="themes" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute top-0 right-1/4 w-96 h-96 bg-theme1-primary opacity-5 rounded-full filter blur-3xl"></div>
+            <div class="absolute bottom-0 left-1/4 w-96 h-96 bg-theme2-primary opacity-5 rounded-full filter blur-3xl"></div>
+        </div>
+        
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1.5 bg-purple-100 text-theme1-primary rounded-full text-sm font-medium mb-4">قالب‌های ما</span>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">قالب‌های زیبا و کاربردی</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">انتخاب کنید، سفارشی کنید، و با خیال راحت استفاده کنید. قالب‌های ما برای تجربه کاربری عالی طراحی شده‌اند.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Theme 1 -->
+                <div class="group relative">
+                    <div class="absolute inset-0.5 bg-gradient-to-r from-theme1-light to-theme1-dark rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
+                    <div class="theme-card bg-white rounded-3xl shadow-lg overflow-hidden card-hover-effect relative">
+                        <div class="h-36 overflow-hidden">
+                            <div class="p-8 theme1-gradient text-white">
+                                <h3 class="text-3xl font-bold">قالب کلاسیک (تم ۱)</h3>
+                                <p class="opacity-90 mt-2 text-lg">طراحی مینیمال و کلاسیک برای صفحات احراز هویت</p>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="px-3 py-1 bg-purple-50 text-theme1-primary rounded-full text-xs">ریسپانسیو</span>
+                                <span class="px-3 py-1 bg-purple-50 text-theme1-primary rounded-full text-xs">RTL</span>
+                                <span class="px-3 py-1 bg-purple-50 text-theme1-primary rounded-full text-xs">دسترسی‌پذیری</span>
+                                <span class="px-3 py-1 bg-purple-50 text-theme1-primary rounded-full text-xs">متن باز</span>
+                            </div>
+                            
+                            <h4 class="font-bold mb-4 text-lg">صفحات موجود:</h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                                <a href="01_theme/login.html" class="px-4 py-3 bg-gray-50 rounded-xl text-theme1-primary hover:bg-gray-100 transition flex items-center gap-2 border border-gray-100 group">
+                                    <div class="w-10 h-10 rounded-lg theme1-gradient flex items-center justify-center text-white">
+                                        <i class="fas fa-sign-in-alt"></i>
+                                    </div>
+                                    <span>صفحه ورود</span>
+                                    <i class="fas fa-chevron-left mr-auto text-gray-300 group-hover:text-theme1-primary transition"></i>
+                                </a>
+                                <a href="01_theme/register.html" class="px-4 py-3 bg-gray-50 rounded-xl text-theme1-primary hover:bg-gray-100 transition flex items-center gap-2 border border-gray-100 group">
+                                    <div class="w-10 h-10 rounded-lg theme1-gradient flex items-center justify-center text-white">
+                                        <i class="fas fa-user-plus"></i>
+                                    </div>
+                                    <span>صفحه ثبت نام</span>
+                                    <i class="fas fa-chevron-left mr-auto text-gray-300 group-hover:text-theme1-primary transition"></i>
+                                </a>
+                                <a href="01_theme/forgot-password.html" class="px-4 py-3 bg-gray-50 rounded-xl text-theme1-primary hover:bg-gray-100 transition flex items-center gap-2 border border-gray-100 group">
+                                    <div class="w-10 h-10 rounded-lg theme1-gradient flex items-center justify-center text-white">
+                                        <i class="fas fa-key"></i>
+                                    </div>
+                                    <span>فراموشی رمز عبور</span>
+                                    <i class="fas fa-chevron-left mr-auto text-gray-300 group-hover:text-theme1-primary transition"></i>
+                                </a>
+                                <a href="01_theme/reset-password.html" class="px-4 py-3 bg-gray-50 rounded-xl text-theme1-primary hover:bg-gray-100 transition flex items-center gap-2 border border-gray-100 group">
+                                    <div class="w-10 h-10 rounded-lg theme1-gradient flex items-center justify-center text-white">
+                                        <i class="fas fa-lock"></i>
+                                    </div>
+                                    <span>بازنشانی رمز عبور</span>
+                                    <i class="fas fa-chevron-left mr-auto text-gray-300 group-hover:text-theme1-primary transition"></i>
+                                </a>
+                                <a href="01_theme/email-template.html" class="px-4 py-3 bg-gray-50 rounded-xl text-theme1-primary hover:bg-gray-100 transition flex items-center gap-2 border border-gray-100 group">
+                                    <div class="w-10 h-10 rounded-lg theme1-gradient flex items-center justify-center text-white">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <span>قالب ایمیل</span>
+                                    <i class="fas fa-chevron-left mr-auto text-gray-300 group-hover:text-theme1-primary transition"></i>
+                                </a>
+                                <a href="01_theme/README.md" class="px-4 py-3 bg-gray-50 rounded-xl text-theme1-primary hover:bg-gray-100 transition flex items-center gap-2 border border-gray-100 group">
+                                    <div class="w-10 h-10 rounded-lg theme1-gradient flex items-center justify-center text-white">
+                                        <i class="fas fa-file-alt"></i>
+                                    </div>
+                                    <span>مستندات</span>
+                                    <i class="fas fa-chevron-left mr-auto text-gray-300 group-hover:text-theme1-primary transition"></i>
+                                </a>
+                            </div>
+                            <div class="flex gap-4">
+                                <a href="01_theme/README.md" class="flex-1 px-4 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition text-center">
+                                    <i class="fas fa-info-circle ml-2"></i>
+                                    مستندات
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Theme 2 -->
+                <div class="group relative">
+                    <div class="absolute inset-0.5 bg-gradient-to-r from-theme2-light to-theme2-dark rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
+                    <div class="theme-card bg-white rounded-3xl shadow-lg overflow-hidden card-hover-effect relative">
+                        <div class="h-36 overflow-hidden">
+                            <div class="p-8 theme2-gradient text-white">
+                                <h3 class="text-3xl font-bold">قالب مدرن (تم ۲)</h3>
+                                <p class="opacity-90 mt-2 text-lg">طراحی مدرن با افکت شیشه‌ای و انیمیشن‌های ظریف</p>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="px-3 py-1 bg-indigo-50 text-theme2-primary rounded-full text-xs">ریسپانسیو</span>
+                                <span class="px-3 py-1 bg-indigo-50 text-theme2-primary rounded-full text-xs">RTL</span>
+                                <span class="px-3 py-1 bg-indigo-50 text-theme2-primary rounded-full text-xs">Glass Effect</span>
+                                <span class="px-3 py-1 bg-indigo-50 text-theme2-primary rounded-full text-xs">متن باز</span>
+                            </div>
+                            
+                            <h4 class="font-bold mb-4 text-lg">صفحات موجود:</h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                                <a href="02_theme/login.html" class="px-4 py-3 bg-gray-50 rounded-xl text-theme2-primary hover:bg-gray-100 transition flex items-center gap-2 border border-gray-100 group">
+                                    <div class="w-10 h-10 rounded-lg theme2-gradient flex items-center justify-center text-white">
+                                        <i class="fas fa-sign-in-alt"></i>
+                                    </div>
+                                    <span>صفحه ورود</span>
+                                    <i class="fas fa-chevron-left mr-auto text-gray-300 group-hover:text-theme2-primary transition"></i>
+                                </a>
+                                <a href="02_theme/register.html" class="px-4 py-3 bg-gray-50 rounded-xl text-theme2-primary hover:bg-gray-100 transition flex items-center gap-2 border border-gray-100 group">
+                                    <div class="w-10 h-10 rounded-lg theme2-gradient flex items-center justify-center text-white">
+                                        <i class="fas fa-user-plus"></i>
+                                    </div>
+                                    <span>صفحه ثبت نام</span>
+                                    <i class="fas fa-chevron-left mr-auto text-gray-300 group-hover:text-theme2-primary transition"></i>
+                                </a>
+                                <a href="02_theme/forgot-password.html" class="px-4 py-3 bg-gray-50 rounded-xl text-theme2-primary hover:bg-gray-100 transition flex items-center gap-2 border border-gray-100 group">
+                                    <div class="w-10 h-10 rounded-lg theme2-gradient flex items-center justify-center text-white">
+                                        <i class="fas fa-key"></i>
+                                    </div>
+                                    <span>فراموشی رمز عبور</span>
+                                    <i class="fas fa-chevron-left mr-auto text-gray-300 group-hover:text-theme2-primary transition"></i>
+                                </a>
+                                <a href="02_theme/reset-password.html" class="px-4 py-3 bg-gray-50 rounded-xl text-theme2-primary hover:bg-gray-100 transition flex items-center gap-2 border border-gray-100 group">
+                                    <div class="w-10 h-10 rounded-lg theme2-gradient flex items-center justify-center text-white">
+                                        <i class="fas fa-lock"></i>
+                                    </div>
+                                    <span>بازنشانی رمز عبور</span>
+                                    <i class="fas fa-chevron-left mr-auto text-gray-300 group-hover:text-theme2-primary transition"></i>
+                                </a>
+                                <a href="02_theme/email-template.html" class="px-4 py-3 bg-gray-50 rounded-xl text-theme2-primary hover:bg-gray-100 transition flex items-center gap-2 border border-gray-100 group">
+                                    <div class="w-10 h-10 rounded-lg theme2-gradient flex items-center justify-center text-white">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <span>قالب ایمیل</span>
+                                    <i class="fas fa-chevron-left mr-auto text-gray-300 group-hover:text-theme2-primary transition"></i>
+                                </a>
+                                <a href="02_theme/README.md" class="px-4 py-3 bg-gray-50 rounded-xl text-theme2-primary hover:bg-gray-100 transition flex items-center gap-2 border border-gray-100 group">
+                                    <div class="w-10 h-10 rounded-lg theme2-gradient flex items-center justify-center text-white">
+                                        <i class="fas fa-file-alt"></i>
+                                    </div>
+                                    <span>مستندات</span>
+                                    <i class="fas fa-chevron-left mr-auto text-gray-300 group-hover:text-theme2-primary transition"></i>
+                                </a>
+                            </div>
+                            <div class="flex gap-4">
+                                <a href="02_theme/README.md" class="flex-1 px-4 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition text-center">
+                                    <i class="fas fa-info-circle ml-2"></i>
+                                    مستندات
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-24 text-center">
+                <div class="inline-block p-6 bg-gray-50 rounded-2xl shadow-sm border border-gray-100 max-w-2xl mx-auto">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-yellow-100 text-yellow-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-lightbulb text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">به زودی...</h3>
+                    <p class="text-gray-600 mb-6">قالب‌های جدید با طراحی‌های مختلف به زودی اضافه خواهند شد. برای اطلاع از به‌روزرسانی‌ها، مخزن گیت‌هاب را دنبال کنید.</p>
+                    <a href="https://github.com/code3-dev/AverioUI" target="_blank" class="inline-flex items-center px-6 py-3 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition">
+                        <i class="fab fa-github ml-2"></i>
+                        دنبال کردن در گیت‌هاب
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Getting Started Section -->
+    <section class="py-24 bg-gray-50 relative overflow-hidden">
+        <div class="absolute inset-0 -z-10 opacity-30">
+            <div class="absolute -top-20 -right-20 w-96 h-96 bg-theme1-light opacity-10 rounded-full filter blur-3xl"></div>
+            <div class="absolute -bottom-20 -left-20 w-96 h-96 bg-theme2-light opacity-10 rounded-full filter blur-3xl"></div>
+        </div>
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1.5 bg-green-100 text-green-600 rounded-full text-sm font-medium mb-4">راهنمای شروع</span>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">به کارگیری قالب‌ها در ۴ مرحله</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">به سرعت و سادگی قالب‌ها را دانلود کنید و در پروژه خود استفاده نمایید.</p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="relative">
+                    <div class="absolute top-0 bottom-0 right-11 w-1 bg-gray-200 dark:bg-gray-700"></div>
+                    
+                    <div class="relative mb-12">
+                        <div class="absolute right-8 top-5 -translate-x-1/2 transform -translate-y-1/2 w-8 h-8 rounded-full border-4 border-white bg-theme1-primary z-10"></div>
+                        <div class="mr-20 p-8 bg-white rounded-3xl shadow-sm hover:shadow-lg transition-shadow duration-300">
+                            <h3 class="text-xl font-bold mb-4 flex items-center">
+                                <span class="w-8 h-8 rounded-full theme1-gradient text-white flex items-center justify-center ml-3">1</span>
+                                کلون کردن مخزن
+                            </h3>
+                            <p class="text-gray-600 mb-4">با استفاده از Git مخزن را کلون کنید تا به تمامی فایل‌های مورد نیاز دسترسی داشته باشید.</p>
+                            <div class="relative">
+                                <div class="bg-gray-800 text-white p-4 rounded-xl overflow-x-auto mb-2">
+                                    <pre dir="ltr" class="language-bash"><code>git clone https://github.com/code3-dev/AverioUI.git</code></pre>
+                                </div>
+                                <button onclick="copyToClipboard('git clone https://github.com/code3-dev/AverioUI.git')" class="absolute top-3 right-3 bg-white/10 hover:bg-white/20 text-white p-1.5 rounded-lg transition-colors">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                                <div id="copyNotification" class="hidden absolute top-3 right-12 bg-green-500 text-white text-xs py-1 px-2 rounded">کپی شد!</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative mb-12">
+                        <div class="absolute right-8 top-5 -translate-x-1/2 transform -translate-y-1/2 w-8 h-8 rounded-full border-4 border-white bg-theme2-primary z-10"></div>
+                        <div class="mr-20 p-8 bg-white rounded-3xl shadow-sm hover:shadow-lg transition-shadow duration-300">
+                            <h3 class="text-xl font-bold mb-4 flex items-center">
+                                <span class="w-8 h-8 rounded-full theme2-gradient text-white flex items-center justify-center ml-3">2</span>
+                                انتخاب قالب مورد نظر
+                            </h3>
+                            <p class="text-gray-600 mb-4">هر دو قالب در پوشه‌های جداگانه قرار دارند. قالب مناسب نیاز خود را انتخاب کنید.</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="bg-purple-50 p-4 rounded-xl border border-purple-100">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <div class="w-6 h-6 rounded-md theme1-gradient flex items-center justify-center text-white">
+                                            <i class="fas fa-folder text-xs"></i>
+                                        </div>
+                                        <p dir="ltr" class="font-bold text-theme1-primary">01_theme</p>
+                                    </div>
+                                    <p class="text-gray-600 text-sm">قالب کلاسیک با طراحی ساده و کاربردی</p>
+                                </div>
+                                <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100">
+                                    <div class="flex items-center gap-3 mb-2">
+                                        <div class="w-6 h-6 rounded-md theme2-gradient flex items-center justify-center text-white">
+                                            <i class="fas fa-folder text-xs"></i>
+                                        </div>
+                                        <p dir="ltr" class="font-bold text-theme2-primary">02_theme</p>
+                                    </div>
+                                    <p class="text-gray-600 text-sm">قالب مدرن با افکت شیشه‌ای و انیمیشن</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative mb-12">
+                        <div class="absolute right-8 top-5 -translate-x-1/2 transform -translate-y-1/2 w-8 h-8 rounded-full border-4 border-white bg-theme1-primary z-10"></div>
+                        <div class="mr-20 p-8 bg-white rounded-3xl shadow-sm hover:shadow-lg transition-shadow duration-300">
+                            <h3 class="text-xl font-bold mb-4 flex items-center">
+                                <span class="w-8 h-8 rounded-full theme1-gradient text-white flex items-center justify-center ml-3">3</span>
+                                سفارشی‌سازی
+                            </h3>
+                            <p class="text-gray-600 mb-4">فایل‌های HTML و CSS را مطابق با نیازهای پروژه خود سفارشی کنید. برای اطلاعات بیشتر، مستندات هر قالب را مطالعه کنید.</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="flex items-center gap-3 p-3 border border-gray-200 rounded-xl">
+                                    <i class="fas fa-palette text-theme1-primary"></i>
+                                    <span>تغییر رنگ‌بندی</span>
+                                </div>
+                                <div class="flex items-center gap-3 p-3 border border-gray-200 rounded-xl">
+                                    <i class="fas fa-font text-theme2-primary"></i>
+                                    <span>تغییر فونت</span>
+                                </div>
+                                <div class="flex items-center gap-3 p-3 border border-gray-200 rounded-xl">
+                                    <i class="fas fa-image text-theme1-primary"></i>
+                                    <span>تغییر تصاویر</span>
+                                </div>
+                                <div class="flex items-center gap-3 p-3 border border-gray-200 rounded-xl">
+                                    <i class="fas fa-file-code text-theme2-primary"></i>
+                                    <span>ویرایش HTML/CSS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative">
+                        <div class="absolute right-8 top-5 -translate-x-1/2 transform -translate-y-1/2 w-8 h-8 rounded-full border-4 border-white bg-theme2-primary z-10"></div>
+                        <div class="mr-20 p-8 bg-white rounded-3xl shadow-sm hover:shadow-lg transition-shadow duration-300">
+                            <h3 class="text-xl font-bold mb-4 flex items-center">
+                                <span class="w-8 h-8 rounded-full theme2-gradient text-white flex items-center justify-center ml-3">4</span>
+                                استفاده در پروژه
+                            </h3>
+                            <p class="text-gray-600 mb-6">فایل‌های سفارشی‌شده را در پروژه خود قرار دهید و از آن‌ها استفاده کنید. این قالب‌ها با هر فریم‌ورک بک‌اند سازگار هستند.</p>
+                            <div class="flex items-center p-4 bg-green-50 rounded-xl border border-green-100">
+                                <div class="w-10 h-10 rounded-xl bg-green-500 text-white flex items-center justify-center ml-4">
+                                    <i class="fas fa-check"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-green-800">آماده برای استفاده!</h4>
+                                    <p class="text-green-700 text-sm">قالب‌ها آماده استفاده در پروژه‌های شما هستند.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Developer Info Section -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-theme1-light/80 to-theme2-primary/80 -z-10"></div>
+        <div class="absolute inset-0 -z-20 bg-grid-pattern opacity-10"></div>
+        
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1.5 bg-white/20 backdrop-blur-sm text-white rounded-full text-sm font-medium mb-4">سازنده</span>
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-white">توسعه‌دهنده</h2>
+                <p class="text-white/80 max-w-2xl mx-auto text-lg">با طراح و برنامه‌نویس این مجموعه قالب‌ها آشنا شوید.</p>
+            </div>
+            
+            <div class="max-w-5xl mx-auto">
+                <div class="p-8 md:p-12 bg-white/10 backdrop-blur-md rounded-3xl shadow-2xl border border-white/20">
+                    <div class="flex flex-col md:flex-row gap-12 items-center">
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-theme1-light rounded-full blur-xl opacity-30"></div>
+                            <img src="dev.jpg" alt="حسین پیرا" class="w-48 h-48 object-cover rounded-full relative z-10 border-4 border-white/30 shadow-xl">
+                            <div class="absolute -bottom-2 -right-2 w-12 h-12 bg-theme1-gradient rounded-full flex items-center justify-center text-white border-4 border-white z-20">
+                                <i class="fas fa-code text-lg"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="flex-1 text-center md:text-right">
+                            <h3 class="text-3xl font-bold mb-4 text-white flex items-center justify-center md:justify-start gap-3">
+                                <span>حسین پیرا</span>
+                                <span class="inline-block bg-blue-500/20 text-blue-200 text-xs px-2 py-1 rounded-md">طراح و توسعه‌دهنده</span>
+                            </h3>
+                            
+                            <p class="text-white/80 mb-8 text-lg">
+                                توسعه‌دهنده فول استک با تخصص در فرانت‌اند، بک‌اند و طراحی رابط کاربری. عاشق ایجاد تجربه‌های کاربری زیبا و کاربردی و سیستم‌های قدرتمند برای وب.
+                            </p>
+                            
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <a href="https://t.me/h3dev" target="_blank" class="flex items-center gap-3 bg-white/10 hover:bg-white/20 transition p-4 rounded-xl text-white">
+                                    <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                                        <i class="fab fa-telegram-plane"></i>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-xs text-white/60">تلگرام</div>
+                                    </div>
+                                </a>
+                                
+                                <a href="https://instagram.com/h3dev.pira" target="_blank" class="flex items-center gap-3 bg-white/10 hover:bg-white/20 transition p-4 rounded-xl text-white">
+                                    <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                                        <i class="fab fa-instagram"></i>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-xs text-white/60">اینستاگرام</div>
+                                    </div>
+                                </a>
+                                
+                                <a href="mailto:h3dev.pira@gmail.com" class="flex items-center gap-3 bg-white/10 hover:bg-white/20 transition p-4 rounded-xl text-white">
+                                    <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-xs text-white/60">ایمیل</div>
+                                    </div>
+                                </a>
+                                
+                                <a href="https://github.com/code3-dev" target="_blank" class="flex items-center gap-3 bg-white/10 hover:bg-white/20 transition p-4 rounded-xl text-white">
+                                    <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+                                        <i class="fab fa-github"></i>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-xs text-white/60">گیت‌هاب</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 text-center">
+                    <a href="https://github.com/code3-dev/AverioUI/issues" target="_blank" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 transition text-white py-3 px-6 rounded-xl backdrop-blur-sm border border-white/10">
+                        <i class="fas fa-comment-alt"></i>
+                        <span>گزارش مشکل یا درخواست ویژگی جدید</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="relative bg-gray-900 text-white overflow-hidden">
+        <div class="absolute inset-0 -z-10">
+            <div class="absolute top-0 left-0 w-64 h-64 bg-theme1-primary opacity-10 rounded-full filter blur-3xl"></div>
+            <div class="absolute bottom-0 right-0 w-64 h-64 bg-theme2-primary opacity-10 rounded-full filter blur-3xl"></div>
+        </div>
+        
+        <div class="container mx-auto px-4">
+            <!-- Top Footer -->
+            <div class="py-12 border-b border-gray-800">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                    <div class="text-center md:text-right">
+                        <div class="flex items-center justify-center md:justify-start gap-3 mb-4">
+                            <div class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center">
+                                <i class="fas fa-layer-group text-theme1-light"></i>
+                            </div>
+                            <span class="font-en font-bold text-2xl tracking-wide">AverioUI</span>
+                        </div>
+                        <p class="text-white/60 max-w-md">
+                            مجموعه قالب‌های احراز هویت متن باز با پشتیبانی از RTL برای پروژه‌های وب.
+                        </p>
+                    </div>
+                    
+                    <div class="flex flex-col items-center md:items-end">
+                        <h4 class="text-lg font-bold mb-3">دسترسی سریع</h4>
+                        <div class="flex flex-wrap gap-3 justify-center md:justify-end">
+                            <a href="#" class="px-3 py-1 bg-white/5 hover:bg-white/10 transition rounded-md text-white/80 hover:text-white">صفحه اصلی</a>
+                            <a href="#themes" class="px-3 py-1 bg-white/5 hover:bg-white/10 transition rounded-md text-white/80 hover:text-white">قالب‌ها</a>
+                            <a href="https://github.com/code3-dev/AverioUI" target="_blank" class="px-3 py-1 bg-white/5 hover:bg-white/10 transition rounded-md text-white/80 hover:text-white">گیت‌هاب</a>
+                            <a href="https://github.com/code3-dev/AverioUI/issues" target="_blank" class="px-3 py-1 bg-white/5 hover:bg-white/10 transition rounded-md text-white/80 hover:text-white">گزارش مشکل</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bottom Footer -->
+            <div class="py-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="flex items-center gap-2 mb-4 md:mb-0">
+                        <div class="flex items-center gap-2 text-white/60 text-sm">
+                            <i class="fas fa-code text-theme1-light"></i>
+                            <span>با</span>
+                            <i class="fas fa-heart text-red-500"></i>
+                            <span>توسط</span>
+                            <a href="https://github.com/code3-dev" target="_blank" class="text-theme1-light hover:text-theme1-light/80 transition">حسین پیرا</a>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col items-center md:items-end">
+                        <div class="text-white/60 text-sm mb-2">
+                            تمامی حقوق محفوظ است &copy; 2025
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <a href="https://github.com/code3-dev" target="_blank" class="text-white/60 hover:text-white transition">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://t.me/h3dev" target="_blank" class="text-white/60 hover:text-white transition">
+                                <i class="fab fa-telegram-plane"></i>
+                            </a>
+                            <a href="https://instagram.com/h3dev.pira" target="_blank" class="text-white/60 hover:text-white transition">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 text-center text-white/40 text-xs">
+                    <p>قالب‌های متن باز احراز هویت | قالب‌های بیشتر به زودی اضافه خواهند شد</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود | AverioUI</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            light: '#8B5CF6',
+                            DEFAULT: '#5B21B6',
+                            dark: '#4C1D95',
+                        },
+                        secondary: {
+                            DEFAULT: '#10B981',
+                        },
+                        accent: {
+                            DEFAULT: '#F59E0B',
+                        }
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100">
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <img src="images/logo.png" alt="لوگو" class="logo">
+                <h1>خوش آمدید</h1>
+                <p>لطفا برای ورود، اطلاعات خود را وارد کنید</p>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="email">ایمیل یا نام کاربری</label>
+                    <div class="input-with-icon">
+                        <i class="input-icon fa-solid fa-envelope"></i>
+                        <input type="text" id="email" name="email" placeholder="ایمیل یا نام کاربری خود را وارد کنید" required>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">رمز عبور</label>
+                    <div class="input-with-icon">
+                        <i class="input-icon fa-solid fa-lock" id="login-password-toggle"></i>
+                        <input type="password" id="password" name="password" placeholder="رمز عبور خود را وارد کنید" required>
+                    </div>
+                </div>
+                
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="remember" name="remember" class="h-4 w-4 text-primary border-gray-300 rounded">
+                        <label for="remember" class="mr-2 text-sm text-gray-600">مرا به خاطر بسپار</label>
+                    </div>
+                    <a href="forgot-password.html" class="text-sm text-primary font-medium hover:underline">فراموشی رمز عبور؟</a>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <span class="flex items-center justify-center">
+                        <span>ورود</span>
+                        <i class="fa-solid fa-arrow-left mr-2"></i>
+                    </span>
+                </button>
+            </form>
+            
+            <div class="form-divider">
+                <span>یا</span>
+            </div>
+            
+            <div class="social-login">
+                <a href="#" class="social-btn">
+                    <i class="fa-brands fa-google"></i>
+                </a>
+                <a href="#" class="social-btn">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-btn">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+            </div>
+            
+            <div class="form-footer">
+                <p>حساب کاربری ندارید؟ <a href="register.html">ثبت نام</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                // Here you would typically make an API call to authenticate the user
+                console.log('Login attempt:', { email, password });
+                
+                // For demonstration, simulate successful login
+                const successMessage = document.createElement('div');
+                successMessage.className = 'success-message';
+                successMessage.innerHTML = '<i class="fa-solid fa-check-circle mr-2"></i> ورود موفقیت آمیز بود! در حال انتقال...';
+                
+                loginForm.prepend(successMessage);
+                
+                // Redirect after 2 seconds (for demonstration)
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 2000);
+            });
+            
+            // Toggle password visibility
+            const togglePassword = () => {
+                const passwordField = document.getElementById('password');
+                const icon = document.getElementById('login-password-toggle');
+                
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    icon.classList.remove('fa-lock');
+                    icon.classList.add('fa-lock-open');
+                } else {
+                    passwordField.type = 'password';
+                    icon.classList.remove('fa-lock-open');
+                    icon.classList.add('fa-lock');
+                }
+            };
+            
+            document.getElementById('login-password-toggle').addEventListener('click', togglePassword);
+        });
+    </script>
+</body>
+</html>

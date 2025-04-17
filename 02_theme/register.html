@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت نام | AverioUI</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            light: '#818CF8',
+                            DEFAULT: '#6366F1',
+                            dark: '#4F46E5',
+                        },
+                        secondary: {
+                            DEFAULT: '#10B981',
+                        },
+                        accent: {
+                            DEFAULT: '#F59E0B',
+                        }
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100">
+    <!-- Background Elements (Decorative) -->
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-primary-light opacity-10 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 bg-secondary opacity-10 rounded-full filter blur-3xl transform -translate-x-1/3 translate-y-1/4"></div>
+    </div>
+
+    <div class="auth-container py-10">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-logo">
+                    <img src="images/logo.png" alt="لوگو" class="rounded-lg">
+                </div>
+                <h1>ایجاد حساب کاربری</h1>
+                <p>لطفا اطلاعات خود را برای ثبت نام وارد کنید</p>
+            </div>
+            
+            <!-- Registration Form -->
+            <form id="registerForm">
+                <div class="form-grid grid-2">
+                    <div class="input-group">
+                        <label for="firstName">نام</label>
+                        <div class="input-with-icon">
+                            <i class="input-icon fa-solid fa-user"></i>
+                            <input type="text" id="firstName" name="firstName" placeholder="نام خود را وارد کنید" required>
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="lastName">نام خانوادگی</label>
+                        <div class="input-with-icon">
+                            <i class="input-icon fa-solid fa-user"></i>
+                            <input type="text" id="lastName" name="lastName" placeholder="نام خانوادگی خود را وارد کنید" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="email">ایمیل</label>
+                    <div class="input-with-icon">
+                        <i class="input-icon fa-solid fa-envelope"></i>
+                        <input type="email" id="email" name="email" placeholder="ایمیل خود را وارد کنید" required>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="mobile">شماره موبایل</label>
+                    <div class="input-with-icon">
+                        <i class="input-icon fa-solid fa-mobile-screen"></i>
+                        <input type="tel" id="mobile" name="mobile" placeholder="شماره موبایل خود را وارد کنید" required>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">رمز عبور</label>
+                    <div class="input-with-icon">
+                        <i class="input-icon fa-solid fa-lock" id="password-toggle"></i>
+                        <input type="password" id="password" name="password" placeholder="رمز عبور خود را وارد کنید" required>
+                    </div>
+                </div>
+                
+                <div class="password-strength">
+                    <div class="password-strength-bars">
+                        <div class="strength-bar" id="strength-bar-1"></div>
+                        <div class="strength-bar" id="strength-bar-2"></div>
+                        <div class="strength-bar" id="strength-bar-3"></div>
+                        <div class="strength-bar" id="strength-bar-4"></div>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="confirmPassword">تکرار رمز عبور</label>
+                    <div class="input-with-icon">
+                        <i class="input-icon fa-solid fa-lock" id="confirm-password-toggle"></i>
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="رمز عبور را مجددا وارد کنید" required>
+                    </div>
+                </div>
+                
+                <!-- Captcha Container -->
+                <div class="captcha-container">
+                    <div class="captcha-image">
+                        <img src="images/captcha.png" alt="کد امنیتی">
+                    </div>
+                    <div class="captcha-refresh">
+                        <i class="fa-solid fa-rotate"></i>
+                        <span>بارگذاری مجدد تصویر</span>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="captcha">کد امنیتی</label>
+                    <div class="input-with-icon">
+                        <i class="input-icon fa-solid fa-shield"></i>
+                        <input type="text" id="captcha" name="captcha" placeholder="کد امنیتی را وارد کنید" required>
+                    </div>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                    <label for="agreeTerms">
+                        <span>با <a href="#" class="text-primary hover:underline">شرایط و قوانین</a> موافقم</span>
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <span class="flex items-center justify-center">
+                        <span>ثبت نام</span>
+                        <i class="fa-solid fa-user-plus mr-2"></i>
+                    </span>
+                </button>
+            </form>
+            
+            <div class="form-footer">
+                <p>حساب کاربری دارید؟ <a href="login.html">ورود</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerForm = document.getElementById('registerForm');
+            const passwordInput = document.getElementById('password');
+            const strengthBars = [
+                document.getElementById('strength-bar-1'),
+                document.getElementById('strength-bar-2'),
+                document.getElementById('strength-bar-3'),
+                document.getElementById('strength-bar-4')
+            ];
+            
+            // Password strength checker
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                
+                // Calculate strength
+                let strength = 0;
+                
+                if (password.length > 0) strength = 1; // At least something
+                if (password.length >= 8) strength = 2; // Decent length
+                if (/[A-Z]/.test(password) && /[a-z]/.test(password)) strength = 3; // Has upper and lowercase
+                if (/[0-9]/.test(password) && /[^A-Za-z0-9]/.test(password)) strength = 4; // Has numbers and special chars
+                
+                // Update strength bars
+                updateStrengthBars(strength);
+            });
+            
+            function updateStrengthBars(strength) {
+                // Reset all bars
+                strengthBars.forEach(bar => {
+                    bar.className = 'strength-bar';
+                });
+                
+                // Set colors based on strength
+                const colors = ['#EF4444', '#F59E0B', '#10B981', '#6366F1'];
+                
+                // Update visible bars
+                for (let i = 0; i < strength; i++) {
+                    strengthBars[i].style.backgroundColor = colors[Math.min(strength - 1, 3)];
+                }
+            }
+            
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validate form
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                if (password !== confirmPassword) {
+                    const errorMessage = document.createElement('div');
+                    errorMessage.className = 'error-message';
+                    errorMessage.innerHTML = '<i class="fa-solid fa-exclamation-circle"></i> رمز عبور و تکرار آن مطابقت ندارند!';
+                    
+                    // Remove any existing error message
+                    const existingError = document.querySelector('.error-message');
+                    if (existingError) {
+                        existingError.remove();
+                    }
+                    
+                    registerForm.prepend(errorMessage);
+                    return;
+                }
+                
+                // Add loading state to button
+                const submitButton = this.querySelector('button[type="submit"]');
+                const originalText = submitButton.innerHTML;
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<span class="flex items-center justify-center"><i class="fa-solid fa-spinner fa-spin mr-2"></i> در حال ثبت نام...</span>';
+                
+                // Simulate API call delay
+                setTimeout(() => {
+                    // Here you would typically make an API call to register the user
+                    const formData = new FormData(registerForm);
+                    const userData = Object.fromEntries(formData);
+                    console.log('Registration data:', userData);
+                    
+                    // For demonstration, simulate successful registration
+                    const successMessage = document.createElement('div');
+                    successMessage.className = 'success-message';
+                    successMessage.innerHTML = '<i class="fa-solid fa-check-circle"></i> ثبت نام با موفقیت انجام شد! در حال انتقال...';
+                    
+                    // Remove any existing messages
+                    const existingMessages = document.querySelectorAll('.success-message, .error-message');
+                    existingMessages.forEach(msg => msg.remove());
+                    
+                    registerForm.prepend(successMessage);
+                    
+                    // Redirect after 1.5 seconds (for demonstration)
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 1500);
+                }, 1000);
+            });
+            
+            // Toggle password visibility
+            const togglePassword = (element, inputId) => {
+                const passwordField = document.getElementById(inputId);
+                
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    element.classList.remove('fa-lock');
+                    element.classList.add('fa-lock-open');
+                } else {
+                    passwordField.type = 'password';
+                    element.classList.remove('fa-lock-open');
+                    element.classList.add('fa-lock');
+                }
+            };
+            
+            // Add click handlers to password icons
+            const passwordToggle = document.getElementById('password-toggle');
+            if (passwordToggle) {
+                passwordToggle.addEventListener('click', function() {
+                    togglePassword(this, 'password');
+                });
+            }
+            
+            const confirmPasswordToggle = document.getElementById('confirm-password-toggle');
+            if (confirmPasswordToggle) {
+                confirmPasswordToggle.addEventListener('click', function() {
+                    togglePassword(this, 'confirmPassword');
+                });
+            }
+            
+            // Refresh captcha
+            document.querySelector('.captcha-refresh').addEventListener('click', function() {
+                const captchaImg = document.querySelector('.captcha-image img');
+                captchaImg.src = 'images/captcha.png?base-ok&' + new Date().getTime();
+            });
+            
+            // Add input focus effects
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', () => {
+                    input.parentElement.classList.add('input-focused');
+                });
+                
+                input.addEventListener('blur', () => {
+                    input.parentElement.classList.remove('input-focused');
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

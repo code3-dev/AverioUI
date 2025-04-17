@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود | AverioUI</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            light: '#818CF8',
+                            DEFAULT: '#6366F1',
+                            dark: '#4F46E5',
+                        },
+                        secondary: {
+                            DEFAULT: '#10B981',
+                        },
+                        accent: {
+                            DEFAULT: '#F59E0B',
+                        }
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100">
+    <!-- Background Elements (Decorative) -->
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-primary-light opacity-10 rounded-full filter blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 bg-secondary opacity-10 rounded-full filter blur-3xl transform -translate-x-1/3 translate-y-1/4"></div>
+    </div>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-logo">
+                    <img src="images/logo.png" alt="لوگو" class="rounded-lg">
+                </div>
+                <h1>خوش آمدید</h1>
+                <p>لطفا برای ورود، اطلاعات خود را وارد کنید</p>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="email">ایمیل یا نام کاربری</label>
+                    <div class="input-with-icon">
+                        <i class="input-icon fa-solid fa-user"></i>
+                        <input type="text" id="email" name="email" placeholder="ایمیل یا نام کاربری خود را وارد کنید" required>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">رمز عبور</label>
+                    <div class="input-with-icon">
+                        <i class="input-icon fa-solid fa-lock" id="login-password-toggle"></i>
+                        <input type="password" id="password" name="password" placeholder="رمز عبور خود را وارد کنید" required>
+                    </div>
+                </div>
+                
+                <div class="flex items-center justify-between mb-6">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember">مرا به خاطر بسپار</label>
+                    </div>
+                    <a href="forgot-password.html" class="text-primary-600 text-sm font-medium hover:underline transition">فراموشی رمز عبور؟</a>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <span class="flex items-center justify-center">
+                        <span>ورود</span>
+                        <i class="fa-solid fa-arrow-left mr-2"></i>
+                    </span>
+                </button>
+            </form>
+            
+            <div class="form-divider">
+                <span>یا</span>
+            </div>
+            
+            <div class="social-login">
+                <a href="#" class="social-btn google">
+                    <i class="fa-brands fa-google"></i>
+                </a>
+                <a href="#" class="social-btn facebook">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-btn linkedin">
+                    <i class="fa-brands fa-linkedin-in"></i>
+                </a>
+            </div>
+            
+            <div class="form-footer">
+                <p>حساب کاربری ندارید؟ <a href="register.html">ثبت نام</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                // Add loading state to button
+                const submitButton = this.querySelector('button[type="submit"]');
+                const originalText = submitButton.innerHTML;
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<span class="flex items-center justify-center"><i class="fa-solid fa-spinner fa-spin mr-2"></i> در حال ورود...</span>';
+                
+                // Simulate API call delay
+                setTimeout(() => {
+                    // Here you would typically make an API call to authenticate the user
+                    console.log('Login attempt:', { email, password });
+                    
+                    // For demonstration, simulate successful login
+                    const successMessage = document.createElement('div');
+                    successMessage.className = 'success-message';
+                    successMessage.innerHTML = '<i class="fa-solid fa-check-circle"></i> ورود موفقیت آمیز بود! در حال انتقال...';
+                    
+                    // Remove any existing messages
+                    const existingMessages = document.querySelectorAll('.success-message, .error-message');
+                    existingMessages.forEach(msg => msg.remove());
+                    
+                    loginForm.prepend(successMessage);
+                    
+                    // Redirect after 1.5 seconds (for demonstration)
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1500);
+                }, 1000);
+            });
+            
+            // Toggle password visibility
+            const togglePassword = () => {
+                const passwordField = document.getElementById('password');
+                const icon = document.getElementById('login-password-toggle');
+                
+                if (passwordField.type === 'password') {
+                    passwordField.type = 'text';
+                    icon.classList.remove('fa-lock');
+                    icon.classList.add('fa-lock-open');
+                } else {
+                    passwordField.type = 'password';
+                    icon.classList.remove('fa-lock-open');
+                    icon.classList.add('fa-lock');
+                }
+            };
+            
+            const passwordToggle = document.getElementById('login-password-toggle');
+            if (passwordToggle) {
+                passwordToggle.addEventListener('click', togglePassword);
+            }
+            
+            // Add input focus effects
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', () => {
+                    input.parentElement.classList.add('input-focused');
+                });
+                
+                input.addEventListener('blur', () => {
+                    input.parentElement.classList.remove('input-focused');
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
